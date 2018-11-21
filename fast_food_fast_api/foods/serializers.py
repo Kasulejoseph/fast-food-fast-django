@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Food, SignUp
+from .models import Food, SignUp, LogIn
 
 class SignUpSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,6 +11,12 @@ class SignUpSerializer(serializers.ModelSerializer):
         if name.exists():
             raise serializers.ValidationError("Username already taken, choose another username")
         return username
+
+
+class LogInSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LogIn
+        fields = '__all__'
 
 class FoodSerializer(serializers.ModelSerializer):
     # user = SignUpSerializer(many=True)

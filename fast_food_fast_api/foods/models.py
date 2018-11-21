@@ -8,12 +8,21 @@ class SignUp(models.Model):
     email = models.EmailField(max_length=100) 
     password = models.CharField(max_length=6)
 
+    def __str__(self):
+        return self.username
+
+
+class LogIn(models.Model):
+    username = models.CharField(max_length=30)
+    password = models.CharField(max_length=6)
+
+
 class Food(models.Model):
-    user = models.ForeignKey(SignUp, on_delete=models.CASCADE )
+    user = models.ForeignKey(SignUp, on_delete=models.CASCADE)
     dish = models.CharField(max_length=50)
     desc = models.CharField(max_length=50)
     price = models.IntegerField()
     date_created = models.DateField(default=date.today)
 
     def __str__(self):
-        return str(self.user.username)
+        return self.user.username
